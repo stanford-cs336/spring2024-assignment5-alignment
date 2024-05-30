@@ -19,6 +19,8 @@ pip install -e .'[test]'
 1. Install Flash-Attention 2:
 
 ``` sh
+export CUDA_HOME=/usr/local/cuda
+
 pip install flash-attn --no-build-isolation
 ```
 
