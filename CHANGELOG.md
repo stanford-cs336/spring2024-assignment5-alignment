@@ -10,6 +10,17 @@ All changes we make to the assignment code or PDF will be documented in this fil
 
 ### Fixed
 
+## 0.0.2 - 2024-05-30
+
+### Added
+
+- code: add MMLU, GSM8K, AlpacaEval, and SimpleSafetyTests data to `./data`.
+
+### Changed
+
+### Fixed
+
+
 ## 0.0.1 - 2024-05-30
 
 ### Added
