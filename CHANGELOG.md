@@ -11,6 +11,7 @@ All changes we make to the assignment code or PDF will be documented in this fil
 - code: fix AlpacaEval auto-evaluator to use local Llama 3 70B instruct.
 - code: add missing `evaluate_safety.py` script to `scripts`
 - code: add Llama 3 tokenizer as a fixture.
+- handout: fix typo in code example for writing AlpacaEval outputs.
 
 ### Fixed
 

@@ -5,7 +5,7 @@ echo "Creating virtual environment to run tests"
 python3 -m venv ./336_a5_test_venv
 source ./336_a5_test_venv/bin/activate
 echo "Installing requirements"
-pip install --upgrade pip
+pip install wheel setuptools pip --upgrade
 pip install -e .'[test]'
 echo "Running tests"
 pytest -v ./tests --junitxml=test_results.xml || true
