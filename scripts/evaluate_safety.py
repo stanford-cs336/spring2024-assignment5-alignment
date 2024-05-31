@@ -26,12 +26,11 @@ from xopen import xopen
 logger = logging.getLogger(__name__)
 
 
-def main(input_path, model_name_or_path, num_gpus, hf_cache_path, output_path):
+def main(input_path, model_name_or_path, num_gpus, output_path):
     model = LLM(
         model=model_name_or_path,
         tensor_parallel_size=num_gpus,
         trust_remote_code=True,
-        download_dir=hf_cache_path,
         max_model_len=6144,
     )
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
@@ -121,7 +120,6 @@ if __name__ == "__main__":
         "--model-name-or-path", help="HF name of the model to use", required=True
     )
     parser.add_argument("--num-gpus", help="Number of GPUs to use", type=int, default=1)
-    parser.add_argument("--hf-cache-path", help="Path to huggingface cache to use.")
     parser.add_argument(
         "--output-path",
         type=str,
@@ -134,7 +132,6 @@ if __name__ == "__main__":
         args.input_path,
         args.model_name_or_path,
         args.num_gpus,
-        args.hf_cache_path,
         args.output_path,
     )
     logger.info("finished running %s", sys.argv[0])
