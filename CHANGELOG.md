@@ -13,6 +13,7 @@ All changes we make to the assignment code or PDF will be documented in this fil
 - code: add Llama 3 tokenizer as a fixture.
 - handout: fix typo in code example for writing AlpacaEval outputs.
 - handout: provide more instructions on interpreting AlpacaEval annotations file.
+- handout: give better default DPO hyperparameters
 
 ### Fixed
 
