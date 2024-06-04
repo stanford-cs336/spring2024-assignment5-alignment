@@ -20,11 +20,11 @@ def test_per_instance_dpo_loss():
     loss = compute_per_instance_dpo_loss(
         lm=model,
         lm_ref=model_ref,
-        beta=0.5,
         tokenizer=tokenizer,
+        beta=0.5,
         prompt=prompt,
-        good_response=good_response,
-        bad_response=bad_response,
+        response_chosen=good_response,
+        response_rejected=bad_response,
     )
 
     assert torch.isclose(loss, torch.tensor(0.5785), atol=1e-4)
