@@ -18,8 +18,8 @@ def test_per_instance_dpo_loss():
     bad_response = "their crazy frog."
 
     loss = compute_per_instance_dpo_loss(
-        model=model,
-        pi_ref=model_ref,
+        lm=model,
+        lm_ref=model_ref,
         beta=0.5,
         tokenizer=tokenizer,
         prompt=prompt,
