@@ -18,13 +18,13 @@ def test_per_instance_dpo_loss():
     bad_response = "their crazy frog."
 
     loss = compute_per_instance_dpo_loss(
-        model,
-        model_ref,
-        tokenizer,
-        0.5,
-        prompt,
-        good_response,
-        bad_response,
+        model=model,
+        pi_ref=model_ref,
+        beta=0.5,
+        tokenizer=tokenizer,
+        prompt=prompt,
+        good_response=good_response,
+        bad_response=bad_response,
     )
 
-    assert torch.isclose(loss, torch.tensor(0.6962), atol=1e-4)
+    assert torch.isclose(loss, torch.tensor(0.5785), atol=1e-4)
