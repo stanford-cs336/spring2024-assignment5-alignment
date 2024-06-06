@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 import logging
 import math
 
@@ -21,42 +22,15 @@ def test_packed_sft_dataset():
         seq_length=seq_length,
         shuffle=False,
     )
-    assert len(packed_sft_dataset) == 75
-    examples_with_bos = []
-    examples_with_eos = []
-    for example_idx, example in enumerate(packed_sft_dataset):
-        assert "input_ids" in example
-        assert "labels" in example
 
-        assert len(example["input_ids"]) == seq_length
-        assert len(example["labels"]) == seq_length
-        # Make sure the labels are offset by 1 from the input_ids
-        assert torch.allclose(example["input_ids"][1:], example["labels"][:-1])
+    with open(FIXTURES_PATH / "tokenized_sft_sample.json") as f:
+        expected_examples = json.load(f)
 
-        assert (
-            example["input_ids"].dtype == torch.long
-            or example["input_ids"].dtype == torch.int64
-        )
-        assert (
-            example["labels"].dtype == torch.long
-            or example["labels"].dtype == torch.int64
-        )
+    assert len(packed_sft_dataset) == len(expected_examples)
 
-        decoded_text = tokenizer.decode(example["input_ids"])
-        if tokenizer.bos_token in decoded_text:
-            examples_with_bos.append(example_idx)
-        if tokenizer.eos_token in decoded_text:
-            examples_with_eos.append(example_idx)
-
-    # There should be exactly 5 examples with the bos token
-    assert len(examples_with_bos) == 5
-    # There should be exactly 4 examples with the eos token,
-    # since the last example gets dropped
-    assert len(examples_with_eos) == 4
-
-    # Check that the examples with the bos / eos are the ones that we expect
-    assert examples_with_bos == [0, 28, 43, 50, 67]
-    assert examples_with_eos == [28, 43, 50, 67]
+    for example, expected_example in zip(packed_sft_dataset, expected_examples):
+        assert example["input_ids"].tolist() == expected_example["input_ids"]
+        assert example["labels"].tolist() == expected_example["labels"]
 
     # Check that shuffling works by ensuring that it returns different data
     # than the unshuffled dataset. Note that there's a small chance that it

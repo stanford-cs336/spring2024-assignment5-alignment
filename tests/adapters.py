@@ -110,7 +110,7 @@ def compute_per_instance_dpo_loss(
     lm_ref: torch.nn.Module,
     tokenizer: PreTrainedTokenizerBase,
     beta: float,
-    prompt: float,
+    prompt: str,
     response_chosen: str,
     response_rejected: str,
 ) -> torch.Tensor:
