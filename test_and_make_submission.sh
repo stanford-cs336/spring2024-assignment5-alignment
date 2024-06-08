@@ -31,6 +31,9 @@ zip -r "$output_file" . \
     -x '*.txt' \
     -x '*.log' \
     -x '*.json' \
+    -x '*.pt' \
+    -x '*.safetensors' \
+    -x ./data/\* \
     -x '*.out' \
     -x '*.err' \
     -x '.git*'
